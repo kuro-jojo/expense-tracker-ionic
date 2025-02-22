@@ -1,0 +1,30 @@
+<div class="container">
+    <swiper-container (swiperslidechange)="onSliderChange($event)">
+        <swiper-slide class="page">
+            <ion-img src="assets/images/onboarding1.png" class="icon"></ion-img>
+            <h1 class="title">Gain total control of your money</h1>
+            <p class="body">Become your own money manager and make every cent count</p>
+        </swiper-slide>
+        <swiper-slide class="page">
+            <ion-img src="assets/images/onboarding2.png" class="icon"></ion-img>
+            <h1 class="title">Know where your money goes</h1>
+            <p class="body">Track your transaction easily, with categories and financial report </p>
+        </swiper-slide>
+        <swiper-slide class="page">
+            <ion-img src="assets/images/onboarding3.png" class="icon"></ion-img>
+            <h1 class="title">Planning ahead</h1>
+            <p class="body">Setup your budget for each category so you in control</p>
+        </swiper-slide>
+    </swiper-container>
+
+    <div #slider class="slider">
+        <span class="active"></span>
+        <span class=""></span>
+        <span class=""></span>
+    </div>
+
+    <div class="btns">
+        <ion-button class="signup title3" expand="block" size="large">Sign up</ion-button>
+        <ion-button class="login title3" expand="block" size="large">Login</ion-button>
+    </div>
+</div>

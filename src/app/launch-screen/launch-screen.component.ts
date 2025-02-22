@@ -18,5 +18,4 @@ export class LaunchSreenComponent implements OnInit {
             this.router.navigate(['/onboarding']);
         }, 3000);
     }
-
 }
