@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { IonContent, IonTitle } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-launch-screen',
     templateUrl: './launch-screen.component.html',
     styleUrls: ['./launch-screen.component.scss'],
-    imports: [IonTitle, IonContent]
+    imports: []
 })
 export class LaunchSreenComponent implements OnInit {
 
@@ -14,11 +13,10 @@ export class LaunchSreenComponent implements OnInit {
         private router: Router,
     ) { }
 
-    ngOnInit() { 
-        // setTimeout(() => {
-        //     console.log('Redirecting to onboarding...');
-        //     this.router.navigate(['/onboarding']);
-        // }, 3000);
+    ngOnInit() {
+        setTimeout(() => {
+            this.router.navigate(['/onboarding']);
+        }, 3000);
     }
 
 }
