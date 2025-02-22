@@ -1,0 +1,29 @@
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    --background: var(--bg-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    font-family: "Inter";
+    font-size: 4.7rem;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    padding: 0;
+}
+
+.overlay {
+    position: absolute;
+    left: 35%;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    mix-blend-mode: overlay;
+    background: var(--yellow);
+    filter: blur(15px);
+}
