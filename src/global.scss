@@ -68,6 +68,15 @@
         padding: 0 20px;
     }
 
+    .title2 {
+        display: inline-block;
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        width: 100%;
+        text-align: center;
+    }
+
     .title3 {
         display: inline-block;
         font-family: "Inter", sans-serif;
@@ -89,7 +98,21 @@
     }
 
     ion-button {
+        --border-radius: 16px;
+        --padding-top: 20px;
+        --padding-bottom: 20px;
         text-transform: none;
+        height: 56px;
+    }
+
+    label {
+        color: var(--gray);
+    }
+
+    ion-input {
+        --border-radius: 16px !important;
+        --border-width: 0.5px !important;
+        --border-color: var(--light-gray) !important;
     }
 }
 

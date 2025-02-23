@@ -18,8 +18,20 @@ export const routes: Routes = [
         loadComponent: () => import('./signup/signup.component').then((m) => m.SignupComponent),
     },
     {
+        path: 'forgot-password',
+        loadComponent: () => import('./forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
+    },
+    {
+        path: 'email-sent',
+        loadComponent: () => import('./email-sent/email-sent.component').then((m) => m.EmailSentComponent),
+    },
+    {
+        path: 'reset-password',
+        loadComponent: () => import('./reset-password/reset-password.component').then((m) => m.ResetPasswordComponent),
+    },
+    {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'onboarding',
         pathMatch: 'full',
     },
 ];

@@ -4,6 +4,13 @@ ion-content {
     --overflow: hidden;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 72%;
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -30,32 +37,19 @@ ion-content {
     gap: 5vh;
 }
 
-ion-checkbox {
-    width: 100%;
-    --background: var(--light-gray);
-    --border-color: var(--primary);
-    font-size: 14px;
-}
-
-.terms {
-    font-family: "Inter";
-    font-weight: 500;
-    font-size: 14px;
-}
-
-.terms a {
-    color: var(--primary);
-}
-
 .btns {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     justify-content: center;
 }
 
-.signup {
+.login {
     --background: var(--btn-primary);
+}
+
+.forgot {
+    color: var(--primary);
 }
 
 .google {

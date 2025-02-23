@@ -1,0 +1,23 @@
+<ion-content>
+    <div class="container">
+        <div class="">
+            <ion-img src="assets/images/email-sent.png"></ion-img>
+            <div class="message">
+                <span class="title2"> Your email is on the way </span>
+                <span class="body">
+                    Check your email
+                    <span class="email"> {{ email }} </span> and follow the
+                    instructions to reset your password
+                </span>
+            </div>
+        </div>
+        <ion-button
+            expand="block"
+            size="large"
+            class="continue title3"
+            (click)="goToLogin()"
+        >
+            Go back to Login
+        </ion-button>
+    </div>
+</ion-content>

@@ -1,0 +1,71 @@
+<ion-content>
+    <div class="container">
+        <div class="header">
+            <ion-buttons slot="start">
+                <ion-back-button default-href="/onboarding"></ion-back-button>
+            </ion-buttons>
+            <span class="title3">Login</span>
+        </div>
+
+        <div class="content">
+            <div class="inputs">
+                <ion-input
+                    mode="md"
+                    label="Email"
+                    fill="outline"
+                    type="email"
+                    label-placement="floating"
+                    placeholder="Enter an email"
+                    [clearInput]="true"
+                ></ion-input>
+                <ion-input
+                    #passwordInput
+                    mode="md"
+                    label="Password"
+                    label-placement="floating"
+                    fill="outline"
+                    placeholder="Enter a password"
+                    helperText="Password must be at least 6 characters"
+                    type="password"
+                    [clearOnEdit]="false"
+                    (ionInput)="onPasswordChange($event)"
+                >
+                    <ion-button
+                        fill="clear"
+                        slot="end"
+                        aria-label="Show/hide"
+                        *ngIf="showPassword"
+                        (click)="togglePassword()"
+                    >
+                        <ion-icon name="eye-outline" *ngIf="!eyeOff"></ion-icon>
+                        <ion-icon
+                            name="eye-off-outline"
+                            *ngIf="eyeOff"
+                        ></ion-icon>
+                    </ion-button>
+                </ion-input>
+            </div>
+            <div class="btns">
+                <ion-button expand="block" size="large" class="login title3">
+                    Login
+                </ion-button>
+                <span class="forgot title3" [routerLink]="['/forgot-password']">
+                    Forgot password?
+                </span>
+                <span class="or-with">Or with</span>
+
+                <ion-button expand="block" size="large" class="google title3">
+                    <ion-icon
+                        slot="start"
+                        src="assets/images/google.svg"
+                    ></ion-icon>
+                    Sign Up with Google
+                </ion-button>
+                <span class="already">
+                    Don't have an account yet?
+                    <a href="#" [routerLink]="['/signup']">Sign up</a></span
+                >
+            </div>
+        </div>
+    </div>
+</ion-content>
