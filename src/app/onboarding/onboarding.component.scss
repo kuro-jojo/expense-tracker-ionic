@@ -61,6 +61,8 @@ swiper-container {
 
 ion-button {
     --border-radius: 10px;
+    --padding-top: 20px;
+    --padding-bottom: 20px;
 }
 
 .btns .signup {
@@ -69,5 +71,5 @@ ion-button {
 
 .btns .login {
     --background: var(--btn-secondary);
-    --color: var(--text-purple);
+    --color: var(--primary);
 }

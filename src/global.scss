@@ -51,10 +51,11 @@
     --blue: #0077FF;
     --yellow: #FCAC12;
     --header-black: #212325;
-    --text-purple: #7F3DFF;
-    --text-black: #212325;
-    --text-white: #FCFCFC;
-    --text-gray: #9B9B9B;
+    --primary: #7F3DFF;
+    --black: #212325;
+    --white: #FCFCFC;
+    --gray: #9B9B9B;
+    --light-gray: #F1F1FA;
 
     .title {
         display: inline-block;
@@ -83,8 +84,12 @@
         font-size: 16px;
         width: 100%;
         text-align: center;
-        color: var(--text-gray);
+        color: var(--gray);
         padding: 0 36px;
+    }
+
+    ion-button {
+        text-transform: none;
     }
 }
 
@@ -92,7 +97,7 @@
 
     :root.ios,
     :root.md {
-        --ion-text-color: var(--text-white);
+        --ion-text-color: var(--white);
     }
 }
 
@@ -100,6 +105,6 @@
 
     :root.ios,
     :root.md {
-        --ion-text-color: var(--text-black);
+        --ion-text-color: var(--black);
     }
 }

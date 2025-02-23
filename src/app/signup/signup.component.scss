@@ -1,0 +1,108 @@
+ion-content {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6%;
+}
+
+.title3 {
+    margin-right: 48px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 10px;
+    gap: 30px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    gap: 5vh;
+}
+
+ion-input {
+    --border-radius: 16px !important;
+    --border-width: 0.5px !important;
+    --border-color: var(--light-gray) !important;
+}
+
+ion-checkbox {
+    width: 100%;
+    --background: var(--light-gray);
+    --border-color: var(--primary);
+    // --border-radius: 16px;
+    font-size: 14px;
+}
+
+.terms {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.terms a {
+    color: var(--primary);
+}
+
+.btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+ion-button {
+    --border-radius: 10px;
+    --padding-top: 20px;
+    --padding-bottom: 20px;
+    height: 56px;
+}
+
+.signup {
+    --background: var(--btn-primary);
+}
+
+.google {
+    fill: none;
+    --color: var(--black);
+    --background: var(--white);
+    --box-shadow: none;
+    --border-width: 1px;
+    --border-color: var(--light-gray);
+    --border-style: solid;
+    --border-radius: 16px;
+}
+
+.google ion-icon {
+    font-size: 32px;
+}
+
+.or-with {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    color: var(--gray);
+}
+
+.already {
+    font-family: "Inter";
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: var(--gray);
+}
+
+.already a {
+    color: var(--primary);
+}
