@@ -7,7 +7,7 @@ import {
     IonBackButton,
     IonInput,
     IonButton,
-    IonIcon
+    IonInputPasswordToggle,
 } from '@ionic/angular/standalone';
 import { InputInputEventDetail, IonInputCustomEvent } from '@ionic/core';
 
@@ -22,14 +22,12 @@ import { InputInputEventDetail, IonInputCustomEvent } from '@ionic/core';
         IonBackButton,
         IonInput,
         IonButton,
-        IonIcon
+        IonInputPasswordToggle,
     ]
 })
 export class ResetPasswordComponent implements OnInit {
-
     @ViewChild('passwordInput') passwordInput!: IonInput;
     showPassword = false;
-    eyeOff = false;
 
     constructor(
         private router: Router,
@@ -40,11 +38,6 @@ export class ResetPasswordComponent implements OnInit {
 
     onPasswordChange($event: IonInputCustomEvent<InputInputEventDetail>) {
         this.showPassword = $event.detail.value!.length > 0;
-    }
-
-    togglePassword() {
-        this.eyeOff = !this.eyeOff;
-        this.passwordInput.type = this.eyeOff ? 'text' : 'password';
     }
 
     resetPassword() {

@@ -39,19 +39,10 @@
                     [clearOnEdit]="false"
                     (ionInput)="onPasswordChange($event)"
                 >
-                    <ion-button
-                        fill="clear"
-                        slot="end"
-                        aria-label="Show/hide"
+                    <ion-input-password-toggle
                         *ngIf="showPassword"
-                        (click)="togglePassword()"
-                    >
-                        <ion-icon name="eye-outline" *ngIf="!eyeOff"></ion-icon>
-                        <ion-icon
-                            name="eye-off-outline"
-                            *ngIf="eyeOff"
-                        ></ion-icon>
-                    </ion-button>
+                        slot="end"
+                    ></ion-input-password-toggle>
                 </ion-input>
             </div>
             <ion-checkbox labelPlacement="end">

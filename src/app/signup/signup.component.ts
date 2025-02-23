@@ -8,7 +8,8 @@ import {
     IonInput,
     IonButton,
     IonIcon,
-    IonCheckbox
+    IonCheckbox,
+    IonInputPasswordToggle,
 } from '@ionic/angular/standalone';
 import { IonInputCustomEvent, InputInputEventDetail } from '@ionic/core';
 
@@ -25,13 +26,13 @@ import { IonInputCustomEvent, InputInputEventDetail } from '@ionic/core';
         IonInput,
         IonButton,
         IonIcon,
-        IonCheckbox
+        IonCheckbox,
+        IonInputPasswordToggle,
     ]
 })
 export class SignupComponent implements OnInit {
     @ViewChild('passwordInput') passwordInput!: IonInput;
     showPassword = false;
-    eyeOff = false;
 
     constructor() { }
 
@@ -40,10 +41,5 @@ export class SignupComponent implements OnInit {
 
     onPasswordChange($event: IonInputCustomEvent<InputInputEventDetail>) {
         this.showPassword = $event.detail.value!.length > 0;
-    }
-
-    togglePassword() {
-        this.eyeOff = !this.eyeOff;
-        this.passwordInput.type = this.eyeOff ? 'text' : 'password';
     }
 }
