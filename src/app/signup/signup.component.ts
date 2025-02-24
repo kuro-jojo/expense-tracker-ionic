@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
     IonContent,
     IonButtons,
@@ -34,12 +34,18 @@ export class SignupComponent implements OnInit {
     @ViewChild('passwordInput') passwordInput!: IonInput;
     showPassword = false;
 
-    constructor() { }
+    constructor(
+        private router: Router,
+    ) { }
 
-    ngOnInit() {
-    }
+    ngOnInit() { }
 
     onPasswordChange($event: IonInputCustomEvent<InputInputEventDetail>) {
         this.showPassword = $event.detail.value!.length > 0;
+    }
+
+    signUp() {
+        console.log('Sign up');
+        this.router.navigate(['/verification']);
     }
 }

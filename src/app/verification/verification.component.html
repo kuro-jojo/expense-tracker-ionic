@@ -1,0 +1,56 @@
+<ion-content>
+    <div class="container">
+        <div class="header">
+            <ion-buttons slot="start">
+                <ion-back-button default-href="/onboarding"></ion-back-button>
+            </ion-buttons>
+            <span class="title3">Verification</span>
+        </div>
+
+        <div class="content" #otpRow>
+            <h1 class="title">Enter your verification code</h1>
+
+            <ion-grid id="input2" class="ion-text-center">
+                <ion-row mode="ios" class="ion-justify-content-center">
+                    @for (_ of otpValue; track $index) {
+                    <ion-col size="2" mode="ios">
+                        <ion-input
+                            (ionInput)="onOtpInput($index)"
+                            (keydown)="onKeydown($event, $index)"
+                            fill="outline"
+                            maxlength="1"
+                            minlength="1"
+                            type="tel"
+                            mode="md"
+                        >
+                        </ion-input>
+                    </ion-col>
+                    }
+                </ion-row>
+            </ion-grid>
+
+            <div class="resend">
+                <span class="timer title3" *ngIf="!canResendCode">{{
+                    timerText
+                }}</span>
+                <span class="body"
+                    >We send verification code to your email
+                    <span class="email">brajaoma*****gmail.com </span>. You can
+                    check your inbox.</span
+                >
+                <a href="#" (click)="sendCode($event)" *ngIf="canResendCode"
+                    >I didn't received the code? Send again</a
+                >
+            </div>
+            <ion-button
+                expand="block"
+                size="large"
+                class="verify title3"
+                [disabled]="!isOtpValid"
+                (click)="verifyCode($event)"
+            >
+                Verify
+            </ion-button>
+        </div>
+    </div>
+</ion-content>

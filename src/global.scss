@@ -103,6 +103,10 @@
         --border-width: 0.5px !important;
         --border-color: var(--light-gray) !important;
     }
+
+    a {
+        color: var(--primary);
+    }
 }
 
 @media (prefers-color-scheme: dark) {

@@ -30,6 +30,10 @@ export const routes: Routes = [
         loadComponent: () => import('./reset-password/reset-password.component').then((m) => m.ResetPasswordComponent),
     },
     {
+        path: 'verification',
+        loadComponent: () => import('./verification/verification.component').then((m) => m.VerificationComponent),
+    },
+    {
         path: '**',
         redirectTo: 'onboarding',
         pathMatch: 'full',

@@ -1,0 +1,65 @@
+ion-content {
+    --padding-start: 10px;
+    --padding-end: 10px;
+    --overflow: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 6%;
+}
+
+.title3 {
+    margin-right: 48px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 36px;
+    text-align: start;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin: 5vh 10px;
+    gap: 10px;
+}
+
+.resend {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 20px;
+    padding: 10px;
+}
+
+.resend .timer {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: start;
+}
+
+.resend .body {
+    color: var(--black);
+    text-align: start;
+    padding: 0;
+}
+
+.resend .email {
+    color: var(--primary);
+}
+
+.resend a {
+    font-family: "Inter";
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.verify {
+    --background: var(--btn-primary);
+}
