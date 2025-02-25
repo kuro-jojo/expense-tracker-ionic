@@ -16,19 +16,22 @@
                     type="email"
                     label-placement="floating"
                     placeholder="Enter an email"
+                    errorText="Please enter a valid email"
                     [clearInput]="true"
+                    [formControl]="email"
+                    (keydown.enter)="login()"
                 ></ion-input>
                 <ion-input
-                    #passwordInput
                     mode="md"
                     label="Password"
                     label-placement="floating"
                     fill="outline"
                     placeholder="Enter a password"
-                    helperText="Password must be at least 6 characters"
+                    errorText="Password must be at least 6 characters"
                     type="password"
-                    [clearOnEdit]="false"
                     (ionInput)="onPasswordChange($event)"
+                    [formControl]="password"
+                    (keydown.enter)="login()"
                 >
                     <ion-input-password-toggle
                         *ngIf="showPassword"
@@ -37,7 +40,13 @@
                 </ion-input>
             </div>
             <div class="btns">
-                <ion-button expand="block" size="large" class="login title3">
+                <ion-button
+                    expand="block"
+                    size="large"
+                    class="login title3"
+                    [disabled]="email.invalid || password.invalid || isSubmitting"
+                    (click)="login()"
+                >
                     Login
                 </ion-button>
                 <span class="forgot title3" [routerLink]="['/forgot-password']">
@@ -59,4 +68,10 @@
             </div>
         </div>
     </div>
+    <app-toast
+        [message]="toastMessage"
+        [showSuccess]="isLogginSuccess"
+        [showError]="isLogginFailed"
+        *ngIf="isLogginSuccess || isLogginFailed"
+    />
 </ion-content>

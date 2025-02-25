@@ -1,0 +1,13 @@
+ion-toast {
+    text-align: center;
+    --color: var(--black);
+    --border-radius: 5px;
+}
+
+.success {
+    --background: rgb(80, 236, 80);
+}
+
+.error {
+    --background: rgb(236, 80, 80);
+}
