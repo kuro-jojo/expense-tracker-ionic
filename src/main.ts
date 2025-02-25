@@ -3,7 +3,7 @@ import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } 
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 
 import { routes } from './app/app.routes';
-import { AppComponent } from './app/app.component';
+import { AppComponent } from './app/components/app.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
