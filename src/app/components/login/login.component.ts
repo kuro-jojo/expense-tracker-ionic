@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
     IonContent,
     IonButtons,
@@ -39,13 +39,14 @@ export class LoginComponent implements OnInit {
     showPassword = false;
     email = new FormControl('', [Validators.required, Validators.email]);
     password = new FormControl('', [Validators.required, Validators.minLength(6)]);
-    isLogginSuccess = false;
-    isLogginFailed = false;
+    isLoginSuccessful = false;
+    isLoginFailed = false;
     isSubmitting = false;
     toastMessage = '';
 
     constructor(
         private authService: AuthenticationService,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -65,21 +66,31 @@ export class LoginComponent implements OnInit {
                 .subscribe({
                     next: (response: AuthResponse) => {
                         this.authService.saveToken(response.token);
-                        this.isLogginSuccess = true;
+                        this.isLoginSuccessful = true;
                         this.toastMessage = "Login successful";
                         // TODO navigate to home page
                     },
                     error: (error) => {
                         console.log("Authentication error : ", error?.error?.detail);
-                        this.isLogginFailed = true;
-                        this.toastMessage = "Invalid email or password";
+                        if (error?.error?.detail === "Email not verified") {
+                            this.toastMessage = "Email not verified yet!";
+                            this.isLoginSuccessful = true;
+                            // TODO navigate to email verification page
+                            setTimeout(() => {
+                                this.authService.saveSessionID(error?.error?.sessionID);
+                                this.router.navigate(['/verification']);
+                            }, 1000);
+                        } else {
+                            this.toastMessage = "Invalid email or password";
+                            this.isLoginFailed = true;
+                        }
                     }
                 });
         }
 
         this.isSubmitting = false;
-        this.isLogginFailed = false;
-        this.isLogginSuccess = false;
+        this.isLoginFailed = false;
+        this.isLoginSuccessful = false;
         this.toastMessage = '';
     }
 }

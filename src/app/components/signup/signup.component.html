@@ -7,74 +7,145 @@
             <span class="title3">Sign Up</span>
         </div>
 
-        <div class="content">
-            <div class="inputs">
-                <ion-input
-                    mode="md"
-                    label="Name"
-                    label-placement="floating"
-                    fill="outline"
-                    placeholder="Enter a name"
-                    [clearInput]="true"
-                >
-                </ion-input>
-                <ion-input
-                    mode="md"
-                    label="Email"
-                    fill="outline"
-                    type="email"
-                    label-placement="floating"
-                    placeholder="Enter an email"
-                    [clearInput]="true"
-                ></ion-input>
-                <ion-input
-                    #passwordInput
-                    mode="md"
-                    label="Password"
-                    label-placement="floating"
-                    fill="outline"
-                    placeholder="Enter a password"
-                    helperText="Password must be at least 6 characters"
-                    type="password"
-                    [clearOnEdit]="false"
-                    (ionInput)="onPasswordChange($event)"
-                >
-                    <ion-input-password-toggle
-                        *ngIf="showPassword"
-                        slot="end"
-                    ></ion-input-password-toggle>
-                </ion-input>
+        <form>
+            <div class="content">
+                <div class="inputs">
+                    <ion-input
+                        mode="md"
+                        label="Name"
+                        label-placement="floating"
+                        fill="outline"
+                        placeholder="Enter a name"
+                        errorText="Name is required"
+                        [clearInput]="true"
+                        [formControl]="name"
+                        (keyup.enter)="signUp()"
+                    >
+                    </ion-input>
+                    <ion-input
+                        mode="md"
+                        label="Email"
+                        fill="outline"
+                        type="email"
+                        label-placement="floating"
+                        placeholder="Enter an email"
+                        errorText="Must be a valid email (e.g. example@eg.com)"
+                        [clearInput]="true"
+                        [formControl]="email"
+                        (keyup.enter)="signUp()"
+                    ></ion-input>
+                    <ion-input
+                        #passwordInput
+                        mode="md"
+                        label="Password"
+                        label-placement="floating"
+                        fill="outline"
+                        placeholder="Enter a password"
+                        type="password"
+                        [clearOnEdit]="false"
+                        (ionInput)="onPasswordChange($event)"
+                        [formControl]="password"
+                        (keyup.enter)="signUp()"
+                    >
+                        <ion-input-password-toggle
+                            *ngIf="showPassword"
+                            slot="end"
+                        ></ion-input-password-toggle>
+                    </ion-input>
+                    <ul *ngIf="password.invalid && password.dirty">
+                        <li [class.valid]="passwordCriteria.length">
+                            <ion-icon name="close-outline"></ion-icon>
+                            8 characters
+                        </li>
+                        <li [class.valid]="passwordCriteria.uppercase">
+                            <ion-icon
+                                [name]="
+                                    passwordCriteria.uppercase
+                                        ? 'checkmark-outline'
+                                        : 'close-outline'
+                                "
+                            ></ion-icon>
+                            1 uppercase letter
+                        </li>
+                        <li [class.valid]="passwordCriteria.lowercase">
+                            <ion-icon
+                                [name]="
+                                    passwordCriteria.lowercase
+                                        ? 'checkmark-outline'
+                                        : 'close-outline'
+                                "
+                            ></ion-icon>
+                            1 lowercase letter
+                        </li>
+                        <li [class.valid]="passwordCriteria.number">
+                            <ion-icon
+                                [name]="
+                                    passwordCriteria.number
+                                        ? 'checkmark-outline'
+                                        : 'close-outline'
+                                "
+                            ></ion-icon>
+                            1 number
+                        </li>
+                        <li [class.valid]="passwordCriteria.specialChar">
+                            <ion-icon
+                                [name]="
+                                    passwordCriteria.specialChar
+                                        ? 'checkmark-outline'
+                                        : 'close-outline'
+                                "
+                            ></ion-icon>
+                            1 special character
+                        </li>
+                    </ul>
+                </div>
+                <ion-checkbox labelPlacement="end" [formControl]="terms">
+                    <span class="ion-text-wrap terms">
+                        By signing up, you agree to the
+                        <a href="#" (click)="$event.stopPropagation()">
+                            Terms of Service and Privacy Policy
+                        </a>
+                    </span>
+                </ion-checkbox>
+                <div class="btns">
+                    <ion-button
+                        (click)="signUp()"
+                        expand="block"
+                        size="large"
+                        class="signup title3"
+                        [disabled]="
+                            !name.valid ||
+                            !email.valid ||
+                            !password.valid ||
+                            !terms.valid
+                        "
+                    >
+                        Sign Up
+                    </ion-button>
+                    <span class="or-with">Or with</span>
+                    <ion-button
+                        expand="block"
+                        size="large"
+                        class="google title3"
+                    >
+                        <ion-icon
+                            slot="start"
+                            src="assets/images/google.svg"
+                        ></ion-icon>
+                        Sign Up with Google
+                    </ion-button>
+                    <span class="already">
+                        Already have an account?
+                        <a href="#" [routerLink]="['/login']">Login</a></span
+                    >
+                </div>
             </div>
-            <ion-checkbox labelPlacement="end">
-                <span class="ion-text-wrap terms">
-                    By signing up, you agree to the
-                    <a href="#" (click)="$event.stopPropagation()">
-                        Terms of Service and Privacy Policy
-                    </a>
-                </span>
-            </ion-checkbox>
-            <div class="btns">
-                <ion-button
-                    (click)="signUp()"
-                    expand="block"
-                    size="large"
-                    class="signup title3"
-                >
-                    Sign Up
-                </ion-button>
-                <span class="or-with">Or with</span>
-                <ion-button expand="block" size="large" class="google title3">
-                    <ion-icon
-                        slot="start"
-                        src="assets/images/google.svg"
-                    ></ion-icon>
-                    Sign Up with Google
-                </ion-button>
-                <span class="already">
-                    Already have an account?
-                    <a href="#" [routerLink]="['/login']">Login</a></span
-                >
-            </div>
-        </div>
+        </form>
     </div>
+    <app-toast
+        [message]="toastMessage"
+        [showSuccess]="isSignUpSuccessful"
+        [showError]="isSignUpFailed"
+        *ngIf="isSignUpSuccessful || isSignUpFailed"
+    />
 </ion-content>
