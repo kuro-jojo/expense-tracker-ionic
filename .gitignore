@@ -72,3 +72,6 @@ Thumbs.db
 
 .env
 *environment.ts
+
+android/
+ios/

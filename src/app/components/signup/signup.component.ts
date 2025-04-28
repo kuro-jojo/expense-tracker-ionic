@@ -105,9 +105,11 @@ export class SignupComponent implements OnInit {
                     } else if (err?.error?.status === 400) {
                         console.error("Invalid request", err?.error);
                         this.toastMessage = err?.error?.message;
+                    } else if (err?.status === 0) {
+                        this.toastMessage = "Network error. Please try again";
                     } else {
-                        this.toastMessage = "Sign up failed";
-                        console.error("Sign up failed", err?.error);
+                        this.toastMessage = "Sign up failed : " + err?.error;
+                        console.error("Sign up failed", err);
                     }
                 }
             });

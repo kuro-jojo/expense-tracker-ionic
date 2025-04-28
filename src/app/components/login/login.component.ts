@@ -37,8 +37,13 @@ import { ToastComponent } from '../toast/toast.component';
 })
 export class LoginComponent implements OnInit {
     showPassword = false;
-    email = new FormControl('', [Validators.required, Validators.email]);
+
+    email = new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9_+&*-]+(?:\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/)]);
+
     password = new FormControl('', [Validators.required, Validators.minLength(6)]);
+
     isLoginSuccessful = false;
     isLoginFailed = false;
     isSubmitting = false;
@@ -71,7 +76,7 @@ export class LoginComponent implements OnInit {
                         // TODO navigate to home page
                     },
                     error: (error) => {
-                        console.log("Authentication error : ", error?.error?.detail);
+                        console.log("Authentication error : ", error);
                         if (error?.error?.detail === "Email not verified") {
                             this.toastMessage = "Email not verified yet!";
                             this.isLoginSuccessful = true;
@@ -80,6 +85,9 @@ export class LoginComponent implements OnInit {
                                 this.authService.saveSessionID(error?.error?.sessionID);
                                 this.router.navigate(['/verification']);
                             }, 1000);
+                        } else if (error?.status === 0) {
+                            this.toastMessage = "Network error. Please try again";
+                            this.isLoginFailed = true;
                         } else {
                             this.toastMessage = "Invalid email or password";
                             this.isLoginFailed = true;

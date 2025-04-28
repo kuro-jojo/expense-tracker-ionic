@@ -33,6 +33,11 @@ export class AuthenticationService {
         return this.http.post<string>(`${this.apiUrl}/verify-otp`, req);
     }
 
+    // TODO : add the feature on the backend
+    forgotPassword(email: string) {
+        return this.http.post<string>(`${this.apiUrl}/forgot-password`, { email });
+    }
+
     saveToken(token: string) {
         localStorage.setItem(this.tokenKey, token);
     }
