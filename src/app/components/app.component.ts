@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { closeOutline, checkmarkOutline } from 'ionicons/icons';
 import { register } from 'swiper/element/bundle';
 
 register();
@@ -10,5 +12,7 @@ register();
     imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-    constructor() { }
+    constructor() {
+        addIcons({ checkmarkOutline, closeOutline });
+    }
 }

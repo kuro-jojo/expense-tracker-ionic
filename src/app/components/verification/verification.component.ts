@@ -5,6 +5,7 @@ import {
     QueryList,
     ViewChildren
 } from '@angular/core';
+import { Router } from '@angular/router';
 import {
     IonContent,
     IonButtons,
@@ -15,6 +16,8 @@ import {
     IonRow,
     IonCol,
 } from '@ionic/angular/standalone';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
+import { ToastComponent } from '../toast/toast.component';
 
 @Component({
     selector: 'app-verification',
@@ -29,7 +32,8 @@ import {
         IonButton,
         IonGrid,
         IonRow,
-        IonCol
+        IonCol,
+        ToastComponent,
     ],
 })
 export class VerificationComponent implements OnInit {
@@ -39,11 +43,23 @@ export class VerificationComponent implements OnInit {
     canResendCode = false;
     TIMER_DURATION = 10;
     timerText = `00:${this.TIMER_DURATION}`;
+    sessionID: string | null = '';
 
-    constructor() { }
+    isVerificationSuccessful = false;
+    isVerificationFailed = false;
+    toastMessage = '';
+
+    constructor(
+        private authService: AuthenticationService,
+        private router: Router,
+    ) { }
 
     ngOnInit() {
         this.updateTimer();
+        this.sessionID = this.authService.getSessionID();
+        if (!this.sessionID) {
+            this.router.navigate(['/login']);
+        }
     }
 
     onOtpInput(index: number) {
@@ -70,13 +86,83 @@ export class VerificationComponent implements OnInit {
             if (previousInput) {
                 previousInput.setFocus();
             }
+        } else if (event.key === 'Enter' && this.isOtpValid) {
+            this.verifyCode(event);
         }
     }
 
     sendCode($event: Event) {
         $event.preventDefault();
-        this.updateTimer();
+
+        this.authService.resendVerificationCode({
+            sessionID: this.sessionID!
+        }).subscribe({
+            next: (res) => {
+                this.isVerificationSuccessful = true;
+                this.toastMessage = 'Code sent successfully';
+
+                this.authService.saveSessionID(res?.sessionID);
+                this.sessionID = res?.sessionID;
+                this.updateTimer();
+            },
+            error: (err) => {
+                console.error('Resend code failed', err);
+                this.isVerificationFailed = true;
+                this.toastMessage = 'Failed to send code';
+            }
+        });
+
+        this.otpValue = new Array(6).fill('');
+        this.isOtpValid = false;
+        this.otpInputs?.forEach((input) => {
+            input.writeValue('');
+        });
+
+        this.isVerificationSuccessful = false;
+        this.isVerificationFailed = false;
+        this.toastMessage = '';
     }
+
+    onPaste(event: ClipboardEvent) {
+        event.preventDefault();
+        const pastedData = event.clipboardData?.getData('text') || '';
+        if (pastedData.match(/^[0-9]{6}$/)) {
+            this.otpValue = pastedData.split('');
+            this.isOtpValid = true;
+            this.otpInputs?.forEach((input, index) => {
+                input.writeValue(this.otpValue[index]);
+            });
+        }
+    }
+
+    verifyCode($event: Event) {
+        $event.preventDefault();
+        this.authService.verifyOTP({
+            sessionID: this.sessionID!,
+            otp: this.otpValue.join('')
+        }).subscribe({
+            next: (res) => {
+                console.log('Verify OTP success', res);
+                this.isVerificationSuccessful = true;
+                this.toastMessage = 'Verification successful';
+                this.authService.clearSessionID();
+
+                setTimeout(() => {
+                    this.router.navigate(['/login']);
+                }, 1000);
+            },
+            error: (err) => {
+                console.error('Verify OTP failed', err);
+                this.isVerificationFailed = true;
+                this.toastMessage = 'Invalid OTP';
+            }
+        });
+
+        this.isVerificationFailed = false;
+        this.isVerificationSuccessful = false;
+        this.toastMessage = '';
+    }
+
 
     private updateTimer() {
         this.timerText = `00:${this.TIMER_DURATION}`;
@@ -91,10 +177,5 @@ export class VerificationComponent implements OnInit {
                 this.canResendCode = true;
             }
         }, 1000)
-    }
-
-    verifyCode($event: Event) {
-        $event.preventDefault();
-        console.log('Verify code');
     }
 }

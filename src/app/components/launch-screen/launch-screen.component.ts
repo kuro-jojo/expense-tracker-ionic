@@ -16,6 +16,6 @@ export class LaunchSreenComponent implements OnInit {
     ngOnInit() {
         setTimeout(() => {
             this.router.navigate(['/onboarding']);
-        }, 3000);
+        }, 2000);
     }
 }

@@ -22,7 +22,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/forgot-password/forgot-password.component').then((m) => m.ForgotPasswordComponent),
     },
     {
-        path: 'email-sent',
+        path: 'email-sent/:email',
         loadComponent: () => import('./components/email-sent/email-sent.component').then((m) => m.EmailSentComponent),
     },
     {

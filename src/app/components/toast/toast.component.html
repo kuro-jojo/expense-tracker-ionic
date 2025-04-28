@@ -1,0 +1,14 @@
+<ion-toast
+    class="title3 success"
+    [isOpen]="showSuccess()"
+    [message]="message()"
+    [duration]="5000"
+    (didDismiss)="showSuccessToast(false)"
+></ion-toast>
+<ion-toast
+    class="title3 error"
+    [isOpen]="showError()"
+    [message]="message()"
+    [duration]="5000"
+    (didDismiss)="showFailureToast(false)"
+></ion-toast>

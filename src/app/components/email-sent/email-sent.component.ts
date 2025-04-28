@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     IonContent,
     IonButton,
@@ -19,13 +19,16 @@ import {
     ]
 })
 export class EmailSentComponent implements OnInit {
-    email: string = "email.example.com";
+    email: string | null = "email.example.com";
 
     constructor(
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute,
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.email = this.route.snapshot.paramMap.get('email');
+     }
 
     goToLogin() {
         this.router.navigate(['/login'], { replaceUrl: true });
